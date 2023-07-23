@@ -209,11 +209,9 @@ header {
 }
 #banner .arrow_left {
   left: 10px;
-  position: absolute;
 }
 #banner .arrow_right {
   right: 10px;
-  position: absolute;
 }
 /* Gestion des points du carrousel */
 .dots {
