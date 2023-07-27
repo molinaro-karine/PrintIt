@@ -1,4 +1,4 @@
-const slides = [
+const slider = [
   {
     image: "slide1.jpg",
     tagLine: "Impressions tous formats <span>en boutique et en ligne</span>",
@@ -18,11 +18,65 @@ const slides = [
   },
 ];
 
-// On récupère le conteneur principal du diaporama
-const diapo = document.querySelector("#banner");
-console.log(diapo);
+let slidePosition = 0;
 
-// On récupère les deux flèches
-let next = document.querySelector(".arrow_left");
-let prev = document.querySelector(".arrow_right");
-console.log(next);
+const sliders = document.querySelectorAll(".banner-img");
+const totalSlider = sliders.length;
+const btnPrev = document.querySelector(".arrow_left");
+const btnNext = document.querySelector(".arrow_right");
+
+btnPrev.addEventListener("click", function () {
+  console.log(btnPrev);
+  PrevSlide();
+});
+btnNext.addEventListener("click", function () {
+  NextSlide();
+});
+
+function updatePosition() {
+  sliders.forEach((slide) => {
+    slide.classList.remove("active");
+    slide.classList.add("hidden");
+  });
+  sliders[slidePosition].classList.add("active");
+
+  dots.forEach((dot) => {
+    dot.classList.remove("dot-active");
+  });
+
+  dots[slidePosition].classList.add("dot-active");
+}
+
+function PrevSlide() {
+  if (slidePosition == 0) {
+    slidePosition = totalSlider - 1;
+  } else {
+    slidePosition--;
+  }
+  updatePosition();
+}
+function NextSlide() {
+  if (slidePosition == totalSlider - 1) {
+    slidePosition = 0;
+  } else {
+    slidePosition++;
+  }
+  updatePosition();
+}
+
+const dotContainer = document.querySelector(".dots");
+sliders.forEach((_slide) => {
+  const dot = document.createElement("div");
+  dot.classList.add("dot");
+  dotContainer.appendChild(dot);
+});
+
+const dots = document.querySelectorAll(".dot");
+dots[slidePosition].classList.add("dot.selected");
+
+dots.forEach((dot, index) => {
+  dot.addEventListener("click", function () {
+    slidePosition = index;
+    updatePosition();
+  });
+});
