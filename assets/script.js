@@ -1,24 +1,69 @@
-const slider = [
+const slides = [
   {
-    image: "slide1.jpg",
+    image: "./assets/images/slideshow/slide1.jpg",
     tagLine: "Impressions tous formats <span>en boutique et en ligne</span>",
   },
   {
-    image: "slide2.jpg",
+    image: "./assets/images/slideshow/slide2.jpg",
     tagLine:
       "Tirages haute définition grand format <span>pour vos bureaux et events</span>",
   },
   {
-    image: "slide3.jpg",
+    image: "./assets/images/slideshow/slide3.jpg",
     tagLine: "Grand choix de couleurs <span>de CMJN aux pantones</span>",
   },
   {
-    image: "slide4.png",
+    image: "./assets/images/slideshow/slide4.png",
     tagLine: "Autocollants <span>avec découpe laser sur mesure</span>",
   },
 ];
+const slideContainer = document.querySelector(".banner-img");
+const sliderText = document.querySelector("#banner > p");
+console.log(sliderText);
 
-let slidePosition = 0;
+let slideCounter = 0;
+
+const btnLeft = document.querySelector(".arrow_left");
+const btnRight = document.querySelector(".arrow_right");
+console.log(btnRight);
+
+const startSlider = () => {
+  sliderText.innerHTML = slides[0].tagLine;
+};
+
+btnRight.addEventListener("click", function () {
+  if (slideCounter === slides.length - 1) {
+    sliderText.innerHTML = slides[0].tagLine;
+    console.log(sliderText);
+    slideCounter = -1;
+  }
+  slideContainer.src = slides[slideCounter + 1].image;
+  sliderText.innerHTML = slides[slideCounter + 1].tagLine;
+  slideCounter++;
+});
+
+btnLeft.addEventListener("click", function () {
+  if (slideCounter === 0) {
+    sliderText.innerHTML = slides[slides.length - 1].text;
+    slideCounter = slides.length;
+  }
+
+  slideContainer.src = slides[slideCounter - 1].image;
+  sliderText.innerHTML = slides[slideCounter - 1].tagLine;
+  slideCounter--;
+});
+
+startSlider();
+
+/*function ChangeSlide(sens) {
+  numero = numero + sens;
+  if (numero < 0) numero = slides.length - 1;
+  if (numero > slides.length - 1) numero = 0;
+  document.getElementBy("banner").src = slides[numero];
+}
+console.log(slides);*/
+
+/*let slidePosition = 0;
 
 const sliders = document.querySelectorAll(".banner-img");
 const totalSlider = sliders.length;
@@ -41,10 +86,10 @@ function updatePosition() {
   sliders[slidePosition].classList.add("active");
 
   dots.forEach((dot) => {
-    dot.classList.remove("dot-active");
+    dot.classList.remove("selected");
   });
 
-  dots[slidePosition].classList.add("dot-active");
+  dots[slidePosition].classList.add("selected");
 }
 
 function PrevSlide() {
@@ -72,11 +117,11 @@ sliders.forEach((_slide) => {
 });
 
 const dots = document.querySelectorAll(".dot");
-dots[slidePosition].classList.add("dot.selected");
+dots[slidePosition].classList.add("selected");
 
 dots.forEach((dot, index) => {
   dot.addEventListener("click", function () {
     slidePosition = index;
     updatePosition();
   });
-});
+});*/
