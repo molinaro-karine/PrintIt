@@ -33,8 +33,6 @@ const startSlider = () => {
 
 btnRight.addEventListener("click", function () {
   if (slideCounter === slides.length - 1) {
-    sliderText.innerHTML = slides[0].tagLine;
-    console.log(sliderText);
     slideCounter = -1;
   }
   slideContainer.src = slides[slideCounter + 1].image;
@@ -44,7 +42,6 @@ btnRight.addEventListener("click", function () {
 
 btnLeft.addEventListener("click", function () {
   if (slideCounter === 0) {
-    sliderText.innerHTML = slides[slides.length - 1].text;
     slideCounter = slides.length;
   }
 
