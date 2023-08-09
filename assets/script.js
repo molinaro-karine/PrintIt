@@ -1,19 +1,19 @@
 const slides = [
   {
-    image: "./assets/images/slideshow/slide1.jpg",
+    image: "slide1.jpg",
     tagLine: "Impressions tous formats <span>en boutique et en ligne</span>",
   },
   {
-    image: "./assets/images/slideshow/slide2.jpg",
+    image: "slide2.jpg",
     tagLine:
       "Tirages haute définition grand format <span>pour vos bureaux et events</span>",
   },
   {
-    image: "./assets/images/slideshow/slide3.jpg",
+    image: "slide3.jpg",
     tagLine: "Grand choix de couleurs <span>de CMJN aux pantones</span>",
   },
   {
-    image: "./assets/images/slideshow/slide4.png",
+    image: "slide4.png",
     tagLine: "Autocollants <span>avec découpe laser sur mesure</span>",
   },
 ];
@@ -31,20 +31,23 @@ btnRight.addEventListener("click", function () {
   if (slideCounter === slides.length - 1) {
     slideCounter = -1;
   }
-  slideContainer.src = slides[slideCounter + 1].image;
+  slideContainer.src = `./assets/images/slideshow/${
+    slides[slideCounter + 1].image
+  }`;
   sliderText.innerHTML = slides[slideCounter + 1].tagLine;
   slideCounter++;
   updatePosition();
 });
 
-/* The code is adding an event listener to the `btnLeft` element, which represents the left arrow
+/* The code is adding an event listener to the btnLeft element, which represents the left arrow
 button in a slideshow. When the button is clicked, the function is executed. */
 btnLeft.addEventListener("click", function () {
   if (slideCounter === 0) {
     slideCounter = slides.length;
   }
-
-  slideContainer.src = slides[slideCounter - 1].image;
+  slideContainer.src = `./assets/images/slideshow/${
+    slides[slideCounter - 1].image
+  }`;
   sliderText.innerHTML = slides[slideCounter - 1].tagLine;
   slideCounter--;
   updatePosition();
@@ -71,12 +74,3 @@ slides.forEach((_slide) => {
 
 const dots = document.querySelectorAll(".dot");
 dots[slideCounter].classList.add("selected");
-
-/* The code is adding an event listener to each dot element in the dots array. When a dot is clicked,
-the function is executed. Inside the function, the slideCounter variable is updated with the index
-of the clicked dot.*/
-dots.forEach((dot, index) => {
-  dot.addEventListener("click", function () {
-    slideCounter = index;
-  });
-});
